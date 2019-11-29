@@ -20,42 +20,15 @@ class YmlEnv:
 # config file must exit
 env_config = YmlEnv('env/env.yml').load_to_env()
 
+base_dir = os.path.abspath(os.path.dirname(__file__))
 
 class BaseConfig(object):
     SECRET_KEY = env_config.get('SECRET_KEY') or 'this is a very simple backend'
 
-    SQLALCHEMY_DATABASE_URI = env_config.get('SQLALCHEMY_DATABASE_URI') or 'sqlite:///' + os.path.join(os.getcwd() + 'app.db')
-    # SQLALCHEMY_TRACK_MODIFICATIONS = env_config.get('SQLALCHEMY_TRACK_MODIFICATIONS', False)
-    # SQLALCHEMY_POOL_SIZE = env_config.get('SQLALCHEMY_POOL_SIZE', 100)
-    # SQLALCHEMY_POOL_TIMEOUT = env_config.get('SQLALCHEMY_POOL_TIMEOUT', 5)
-    # SQLALCHEMY_POOL_RECYCLE = 3600 * 6
-    # SQLALCHEMY_ECHO = env_config.get('SQLALCHEMY_ECHO', False)
-    # QCLOUD_SMS_APPID = env_config['QCloud']['sms']['app_id']
-    # QCLOUD_SMS_APPKEY = env_config['QCloud']['sms']['app_key']
-    #
-    # COS_SECRET_ID = env_config['QCloud']['cos']['secret_id']
-    # COS_SECRET_KEY = env_config['QCloud']['cos']['secret_key']
-    # COS_HOST = env_config['QCloud']['cos']['host']
-    # COS_BUCKET = env_config['QCloud']['cos']['bucket']
-    # COS_REGION = env_config['QCloud']['cos']['region']
-    #
-    # WX_TOKEN = env_config['WeChat']['wx_token']
-    # WX_APP_ID = env_config['WeChat']['wx_app_id']
-    # WX_APP_SECRET = env_config['WeChat']['wx_app_secret']
-    # WX_WEB_APP_ID = env_config['WeChat']['wx_web_app_id']
-    # WX_WEB_APP_SECRET = env_config['WeChat']['wx_web_app_secret']
-    #
-    # WX_MCH_ID = env_config['WeChat']['wx_mch_id']
-    # WX_MCH_KEY = env_config['WeChat']['wx_mch_key']
-    # MOBILE_APP_URL = env_config['MobileUrl']['mobile_app_url']
-    # PC_MANAGE_URL = env_config['MobileUrl']['pc_manage_url']
-    # WX_CERT = 'cert/apiclient_cert.pem'
-    # WX_CERT_KEY = 'cert/apiclient_key.pem'
-    #
-    # CELERY_BROKER_URL = 'redis://localhost:6379/0'
-    # CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-    #
-    # APPLICATION = env_config['APPLICATION']
+    SQLALCHEMY_DATABASE_URI = env_config.get('SQLALCHEMY_DATABASE_URI') or 'sqlite:///' + os.path.join( base_dir , 'app.sqlite')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
 
 
 class ProductionConfig(BaseConfig):

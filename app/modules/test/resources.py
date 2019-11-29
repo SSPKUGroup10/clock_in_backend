@@ -5,7 +5,7 @@ from flask import jsonify
 from app.extensions.api import ApiNamespace
 from app.utils import CommonResource
 
-from .entities import TestObj
+from .services import TestObj, TestModelEntity
 
 
 class TestResource(CommonResource):
@@ -15,6 +15,12 @@ class TestResource(CommonResource):
     def post(self):
         data = request.get_json() or {}
         data['recieve'] = 1
+        obj = TestObj.create(data)
         return data
 
 
+class TestModelRsc(CommonResource):
+    def post(self):
+        data = request.get_json() or {}
+        ret_data = TestModelEntity().create(**data)
+        return ret_data

@@ -17,7 +17,7 @@ def create_app(flask_config='development', **kwargs):
     app.config.from_object(CONFIGS[config_name])
 
     init_app_in_debug_mode(app)
-
+    from . import models
     from . import extensions
     extensions.init_app(app)
     from . import modules
