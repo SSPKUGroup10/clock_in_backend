@@ -18,7 +18,7 @@ Jinja2==2.10.3
 kombu==4.6.6
 Mako==1.1.0
 MarkupSafe==1.1.1
-marshmallow==2.14.0
+marshmallow==2.15.1
 mock==2.0.0
 multidict==4.1.0
 parso==0.5.1
