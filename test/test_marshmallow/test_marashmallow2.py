@@ -36,6 +36,6 @@ if __name__ == '__main__':
     print(type(datetime.now()))
     # MarshalResult(data={'a': 1, 'b': 2}, errors={})
     print(TestObjSchema().dump(TestObj()))
-    a = {"b": 2, "a": 1, "c": "2019-11-29 19:44:17"}
-    print(TestObjSchema().load(a).data) # UnmarshalResult(data={}, errors={'_schema': ['Invalid input type.']})
+    a = {"b": 2, "a": 1, "c": "2019-11-29 19:44"}
+    print(TestObjSchema().load(a)) # UnmarshalResult(data={}, errors={'_schema': ['Invalid input type.']})
 
