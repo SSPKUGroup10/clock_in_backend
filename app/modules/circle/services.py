@@ -57,6 +57,37 @@ class CircleList:
         db.save(model)
         return schema.dump(model)
 
+
 class CircleItem:
-    pass
+
+    def get(self, id):
+        circle = Circle.query.filter_by(id=id).first()
+        if circle:
+            schema = CircleSchema()
+            result = schema.dump(circle)
+            return result
+        else:
+            return {}
+
+    def update(self, id, update_data):
+        circle = Circle.query.filter_by(id=id).first()
+        if circle:
+            valid_update_dict = {}
+            valid_update_dict['name'] = update_data.get('name', '')
+            if valid_update_dict.get('name'):
+                circle.name = valid_update_dict.get('name')
+                db.save(circle)
+            schema = CircleSchema()
+            result = schema.dump(circle)
+            return result
+        else:
+            return {}
+
+    def delete(self, id):
+        circle = Circle.query.filter_by(id=id).first()
+        if circle:
+            db.session.delete(circle)
+            return {"msg": "删除成功"}
+        else:
+            return {"msg": "对象不存在"}
 

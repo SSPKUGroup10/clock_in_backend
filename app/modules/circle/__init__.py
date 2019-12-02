@@ -9,7 +9,7 @@ def add_resources(app, **kwargs):
     from . import resources
     ns = ApiNamespace('/circles', api)
     ns.add_resource(resources.CircleListRsc, '/', strict_slashes=True)
-    # ns.add_resource(resources.TestModelRsc, '/model/')
+    ns.add_resource(resources.CircleItemRsc, '/<int:id>/')
 
     # 把resource 挂载上去
     api.init_app(app, **kwargs)

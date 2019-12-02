@@ -19,8 +19,12 @@ class CircleListRsc(CommonResource):
 
 
 class CircleItemRsc(CommonResource):
-    def get(self):
-        pass
+    def get(self, id):
+        return CircleItem().get(id)
 
-    def put(self):
-        pass
+    def put(self, id):
+        data = request.get_json() or {}
+        return CircleItem().update(id, data)
+
+    def delete(self, id):
+        return CircleItem().delete(id)
