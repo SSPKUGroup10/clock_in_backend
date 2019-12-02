@@ -10,7 +10,7 @@ from .services import CircleList, CircleItem
 
 class CircleListRsc(CommonResource):
     def get(self):
-        pass
+        return CircleList().get()
 
     def post(self):
         data = request.get_json() or {}

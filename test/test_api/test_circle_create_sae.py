@@ -2,7 +2,7 @@ import requests
 
 from test.util import show_call
 
-sae_url = "https://2019group10.applinzi.com/"
+sae_url = "https://2019group10.applinzi.com"
 
 @show_call
 def test_circle_create():

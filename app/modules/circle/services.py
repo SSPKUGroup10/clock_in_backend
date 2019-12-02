@@ -30,7 +30,13 @@ class CircleList:
         return "a={}, b={}".format(self.a, self.b)
 
     def get(self):
-        pass
+        cirlcles = Circle.query.all()
+        schema = CircleSchema(many=True)
+        print("*" * 100)
+        print(cirlcles)
+        print(type(cirlcles))
+        result = schema.dump(cirlcles)
+        return result
 
     def create(self, **kwargs):
         schema = CircleSchema()
