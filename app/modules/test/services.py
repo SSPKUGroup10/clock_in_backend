@@ -31,7 +31,7 @@ class TestObj:
         return "a={}, b={}".format(self.a, self.b)
 
     def get(self):
-        return TestObjSchema().dump(self).data
+        return TestObjSchema().dump(self)
 
 
 class TestModelEntity:

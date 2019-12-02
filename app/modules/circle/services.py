@@ -1,4 +1,4 @@
-from marshmallow import fields, Schema
+from marshmallow import fields, Schema, ValidationError
 
 from app.extensions import db
 from app.models.circles import Circle
@@ -34,10 +34,11 @@ class CircleList:
 
     def create(self, **kwargs):
         schema = CircleSchema()
-        result = schema.load(kwargs)
-        if result.errors:
-            return result.errors
-        data = result.data
+        try:
+            result = schema.load(kwargs)
+        except ValidationError as err:
+            return err.messages
+        data = result
         model = Circle()
         model.name = data['name']
         model.type = data['type']
@@ -48,7 +49,7 @@ class CircleList:
         model.circle_master_id = data.get('circle_master_id', 0)
         model.avatar = data.get('avatar', '')
         db.save(model)
-        return schema.dump(model).data
+        return schema.dump(model)
 
 class CircleItem:
     pass

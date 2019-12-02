@@ -15,7 +15,6 @@ class TestResource(CommonResource):
     def post(self):
         data = request.get_json() or {}
         data['recieve'] = 1
-        obj = TestObj.create(data)
         return data
 
 

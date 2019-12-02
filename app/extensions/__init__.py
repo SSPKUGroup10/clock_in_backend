@@ -3,7 +3,6 @@
 from sqlalchemy.dialects.mysql import LONGTEXT
 from .sqlalchemy_plus import SQLAlchemyPlus, CustomizedQuery, IdModel
 
-from celery import Celery
 from .flask_auth import JWTAuth
 
 db = SQLAlchemyPlus(query_class=CustomizedQuery, model_class=IdModel)
