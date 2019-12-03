@@ -1,8 +1,14 @@
 # -*- coding:utf-8 -*-
 from importlib import import_module
 
+from flask import Blueprint
+from flask_restful import Api
+
+
 from app.extensions.api import ApiNamespace
-from .api import api
+
+api = Api()
+blueprint = Blueprint('circles', __name__, url_prefix='/api/v1')
 
 
 def add_resources(app, **kwargs):
@@ -12,7 +18,9 @@ def add_resources(app, **kwargs):
     ns.add_resource(resources.CircleItemRsc, '/<int:id>/')
 
     # 把resource 挂载上去
-    api.init_app(app, **kwargs)
+    # api.init_app(app, **kwargs)
+    api.init_app(blueprint, **kwargs)
+    app.register_blueprint(blueprint)
 
 
 def init_module(app, **kwargs):

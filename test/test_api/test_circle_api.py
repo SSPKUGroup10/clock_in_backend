@@ -5,9 +5,9 @@ from test.util import show_call
 
 @show_call
 def test_circle_create():
-    ping_url = "http://127.0.0.1:8000/circles/"
+    ping_url = "http://127.0.0.1:8000/api/v1/circles/"
     data = {
-        "name": "7点钟起床群",
+        "name": "10点钟起床群",
         "type": "GET_UP",
         "start_at": "2019-10-24 11:11:11",
         "end_at": "2020-10-24 11:11:11",
