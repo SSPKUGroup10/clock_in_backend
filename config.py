@@ -25,7 +25,7 @@ base_dir = os.path.abspath(os.path.dirname(__file__))
 class BaseConfig(object):
     SECRET_KEY = env_config.get('SECRET_KEY') or 'this is a very simple backend'
 
-    SQLALCHEMY_DATABASE_URI = env_config.get('SQLALCHEMY_DATABASE_URI') or 'sqlite:///' + os.path.join( base_dir , 'app.sqlite')
+    # SQLALCHEMY_DATABASE_URI = env_config.get('SQLALCHEMY_DATABASE_URI') or 'sqlite:///' + os.path.join( base_dir , 'app.sqlite')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
