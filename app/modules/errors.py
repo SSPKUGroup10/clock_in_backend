@@ -1,14 +1,14 @@
 # -*- coding:utf-8 -*-
 
 
-YOOQUN_ERRORS = {
+ERRORS = {
     'APITimingError': [60001, 'API调用时序错误'],
     'FieldIncomplete': [60002, '字段缺失错误'],
     'APICallError': [60003, 'API调用错误，该用户不应该调用该API'],
     'OrderUnPaid': [60004, '订单尚未支付'],
     'SmsCodeError': [60005, '短信验证码错误'],
     'DataRelationError': [60006, '数据归属错误'],
-    'UserAuthError': [60007, '用户无权限'],
+    'UserAuthError': [60007, '用户账号或密码为空'],
     'DataNotFound': [60008, '数据不存在'],
     'MethodNotSupport': [60009, '不支持该方法'],
     'DuplicateError': [60010, '数据不允许重复'],

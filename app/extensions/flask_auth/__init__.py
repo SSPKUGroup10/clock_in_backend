@@ -1,8 +1,4 @@
 # -*- coding:utf-8 -*-
-"""
-    Author: Kimi Shi Xi'an HackTech Co,Ltd
-"""
-__version__ = '0.0.1'
 
 import logging
 import jwt as pyjwt

@@ -6,12 +6,14 @@ from flask_migrate import Migrate, MigrateCommand
 from sqlalchemy import func
 from app import create_app
 from app.extensions import db
+from app.models.user import User
 
 app = create_app('development')
 manager = Manager(app)
 
+
 def make_shell_context():
-    return dict(app=app, db=db)
+    return dict(app=app, db=db, User=User)
 
 
 def command_list_routes(name):
