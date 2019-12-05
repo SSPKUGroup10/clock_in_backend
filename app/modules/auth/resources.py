@@ -18,7 +18,7 @@ def user_login(kwargs):
         return {'status': 0, 'errCode': ERRORS['UserAuthError'][0], 'errMsg':  "用户账号密码为空"}
     user = User.query.filter_by(username=kwargs['username']).first()
     if user is None:
-        return {'status': 0, 'errCode': ERRORS['UserAuthError'][0], 'errMsg': '用户名或密码错误！'}
+        return {'status': 0, 'errCode': ERRORS['UserAuthError'][0], 'errMsg': '用户名不存在！'}
     if not user.verify_password(kwargs['password']):
         return {'status': 0, 'errCode': ERRORS['UserAuthError'][0], 'errMsg': '用户名或密码错误！'}
 

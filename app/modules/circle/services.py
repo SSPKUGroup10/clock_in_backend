@@ -5,18 +5,18 @@ from app.models.circles import Circle
 
 
 class CircleSchema(Schema):
-    id = fields.Int(dump_only=True)
-    name = fields.Str(required=True)
+    id = fields.Int(dump_only=True, attribute='id')
+    name = fields.Str(required=True, attribute='name')
     type = fields.Str(required=True)
-    start_at = fields.DateTime()
-    end_at = fields.DateTime()
+    startAt = fields.DateTime(attribute='start_at')
+    endAt = fields.DateTime(attribute='end_at')
     desc = fields.Str()
-    check_rule = fields.Str(required=True)
-    circle_master_id = fields.Int(required=True)
+    checkRule = fields.Str(attribute='check_rule', required=True)
+    circleMasterId = fields.Int(attribute='circle_master_id', required=True)
     avatar = fields.Str()
 
     class Meta:
-        dateformat = "%Y-%m-%d %H:%M:%S"
+        datetimeformat = '%Y-%m-%d %H:%M:%S'
 
 
 class CircleList:

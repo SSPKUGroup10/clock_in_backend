@@ -50,16 +50,6 @@ def secret_key():
     return binascii.hexlify(os.urandom(24))
 
 
-@manager.option('-i', '--uid', help='User id')
-def jwt_token(uid):
-    jwt = JWTAuth()
-    jwt.exp = 3600 * 24 * 100
-    user = User.query.get(uid)
-    user_wechat = UserWechat.query.filter_by(user_id=uid).first()
-    ret = jwt.encode({'oid': user_wechat.public_openid, 'uid': user.id})
-    return ret.decode('utf-8')
-
-
 manager.add_command('shell', Shell(make_context=make_shell_context))
 
 migrate = Migrate(app, db)

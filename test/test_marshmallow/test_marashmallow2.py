@@ -5,21 +5,19 @@ from datetime import datetime
 from marshmallow import fields, Schema
 
 
-
-
 class TestObjSchema(Schema):
-    a = fields.Int(attribute='a')
-    b = fields.Int(attribute='b')
-    c = fields.DateTime()
+    aA = fields.Int(attribute='a_a')
+    bB = fields.Int(attribute='b_a')
+    cC = fields.DateTime(attribute='c_c')
 
     class Meta:
-        dateformat = '%Y-%m-%d %H:%M:%S'
+        datetimeformat = '%Y-%m-%d %H:%M:%S'
 
 
 class TestObj:
-    a = 1
-    b = 2
-    c = datetime.now()
+    a_a = 1
+    b_b = 2
+    c_c = datetime.now()
 
     def __init__(self):
         pass
@@ -36,6 +34,6 @@ if __name__ == '__main__':
     print(type(datetime.now()))
     # MarshalResult(data={'a': 1, 'b': 2}, errors={})
     print(TestObjSchema().dump(TestObj()))
-    a = {"b": 2, "a": 1, "c": "2019-11-29 19:44"}
-    print(TestObjSchema().load(a)) # UnmarshalResult(data={}, errors={'_schema': ['Invalid input type.']})
+    a = {"bB": 2, "aA": 1, "cC": "2019-11-29 19:44"}
+    # print(TestObjSchema().load(a)) # UnmarshalResult(data={}, errors={'_schema': ['Invalid input type.']})
 

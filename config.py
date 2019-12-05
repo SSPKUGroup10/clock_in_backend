@@ -22,13 +22,24 @@ env_config = YmlEnv('env/env.yml').load_to_env()
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
 
+# SAE or local variable
+db_host = os.environ.get('MYSQL_HOST', '127.0.0.1')
+db_port = os.environ.get('MYSQL_PORT', '3306')
+db_user = os.environ.get('MYSQL_USER', 'root')
+db_password = os.environ.get('MYSQL_PASS', 'root')
+db_name = os.environ.get('MYSQL_DB', 'clockin') # MYSQL_DB: app_zxzx
+
+print("*"*100 + "db data")
+print(db_host, db_password, db_user)
+print("*"*100)
+
+
 class BaseConfig(object):
     SECRET_KEY = env_config.get('SECRET_KEY') or 'this is a very simple backend'
 
-    SQLALCHEMY_DATABASE_URI = env_config.get('SQLALCHEMY_DATABASE_URI') or 'sqlite:///' + os.path.join( base_dir , 'app.sqlite')
+    SQLALCHEMY_DATABASE_URI="mysql+pymysql://{}:{}@{}/{}".format(db_user, db_password, '{}:{}'.format(db_host, db_port), db_name)
+    # SQLALCHEMY_DATABASE_URI = env_config.get('SQLALCHEMY_DATABASE_URI') or os.environ.get('SQLALCHEMY_DATABASE_URI') or 'sqlite:///' + os.path.join( base_dir , 'app.sqlite')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-
 
 
 class ProductionConfig(BaseConfig):
