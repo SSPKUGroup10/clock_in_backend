@@ -1,7 +1,10 @@
 from marshmallow import fields, Schema, ValidationError
 
 from app.extensions import db
-from app.models.circles import Circle
+from app.models.circles import Circle, CircleMemberTable
+from app.models.user import User
+
+from app.modules.errors import MISS_DATA, SUCCESS
 
 
 class CircleSchema(Schema):
@@ -20,14 +23,6 @@ class CircleSchema(Schema):
 
 
 class CircleList:
-    a = 1
-    b = 2
-
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        return "a={}, b={}".format(self.a, self.b)
 
     def get(self):
         cirlcles = Circle.query.all()
@@ -91,3 +86,47 @@ class CircleItem:
         else:
             return {"msg": "对象不存在"}
 
+
+class JoinCircleSchema(Schema):
+    circleID = fields.Int(required=True, attribute='circle_id')
+    UserID = fields.Int(required=True, attribute="user_id")
+
+
+class CircleMembeSchema(Schema):
+    UserID = fields.Int(attribute="user_id")
+    avatar = fields.Str()
+    Username = fields.Int(attribute="username")
+
+
+class CircleMember:
+    def __init__(self, circle_id):
+        self.circle = Circle.query.filter_by(id=circle_id).first()
+
+
+    def join_circle(self, **kwargs): # 加入圈子
+        schema = JoinCircleSchema()
+        # 如果有字段缺失错误，就会自动抛出来，被自动处理
+        result = schema.load(kwargs)
+        circle_id = result.get('circle_id', -1)
+        user_id = result.get('user_id', -1)
+        # TODO 校验是否是本人
+
+        circle = self.circle
+        user = User.query.filter_by(id=user_id).first()
+        flag = True
+        if not circle:
+            MISS_DATA['field'] = 'circle_id'
+            flag = flag and False
+        if not user:
+            MISS_DATA['field'] = 'user_id'
+            flag = flag and False
+        if not flag:
+            raise ValidationError(message=MISS_DATA)
+        CircleMemberTable.add(circle, user)
+        return SUCCESS
+
+    def members_of_circle(self): # 圈子成员列表
+        pass
+
+    def clock_in(self): # 打卡
+        pass

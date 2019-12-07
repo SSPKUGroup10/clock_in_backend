@@ -15,7 +15,9 @@ def add_resources(app, **kwargs):
     ns = ApiNamespace('/circles', api)
     ns.add_resource(resources.CircleListRsc, '/', strict_slashes=True)
     ns.add_resource(resources.CircleItemRsc, '/<int:id>/')
+    ns.add_resource(resources.CircleMemRsc, '/<int:circle_id>/members/')
 
+    ######################################################
     # 这段能代码要写在最后，否则当前地址就无法挂到整个项目中去
     # 把resource 挂载上去
     # api.init_app(app, **kwargs)

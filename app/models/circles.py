@@ -16,4 +16,17 @@ class Circle(db.Model):
 
     def update_joined_number(self):
         self.joined_number += 1
-    
+
+
+class CircleMemberTable(db.Model):
+    __tablename__ = 'circles_members'
+    circle_id = db.Column(db.Integer(), index=True)  # 圈子id
+    user_id = db.Column(db.Integer(), index=True)  # 用户ID
+
+    @classmethod
+    def add(cls, circle, user):
+        obj = cls()
+        obj.user_id = user.id
+        obj.circle_id = circle.id
+        db.save(obj)
+        return obj
