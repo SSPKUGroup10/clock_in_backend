@@ -25,7 +25,7 @@ auth_api = Api()
 auth_blueprint = Blueprint('auth', __name__, url_prefix='/api/v1')
 
 
-@blueprint.before_request
+@blueprint.before_request  # blueprint 是要注册的~
 @jwt.jwt_required()
 def before_request():
     pass
@@ -39,7 +39,7 @@ def init_module(app, **kwargs):
 
     jwt.exp = 3600 * 2
 
-    api.init_app(blueprint)
+    api.init_app(blueprint) # 这个
     app.register_blueprint(blueprint)
 
     auth_api.init_app(auth_blueprint)

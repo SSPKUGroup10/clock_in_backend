@@ -34,6 +34,7 @@ class CircleList:
         return result
 
     def create(self, **kwargs):
+        from . import jwt
         schema = CircleSchema()
         try:
             result = schema.load(kwargs)
@@ -50,6 +51,7 @@ class CircleList:
         model.circle_master_id = data.get('circle_master_id', 0)
         model.avatar = data.get('avatar', '')
         db.save(model)
+        CircleMemberTable.add(model, jwt.visitor)
         return schema.dump(model)
 
 
