@@ -34,7 +34,7 @@ class CircleList:
         return result
 
     def create(self, **kwargs):
-        from . import jwt
+        from ..jwt import jwt
         schema = CircleSchema()
         try:
             result = schema.load(kwargs)

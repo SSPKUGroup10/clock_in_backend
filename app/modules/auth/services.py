@@ -4,7 +4,7 @@ from app.models.circles import Circle, CircleMemberTable
 
 
 from app.modules.errors import ERRORS
-from . import jwt
+from ..jwt import jwt
 
 
 def jwt_auth_response(jwt_token, user):
